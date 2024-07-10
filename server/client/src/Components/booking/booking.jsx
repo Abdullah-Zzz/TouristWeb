@@ -33,7 +33,7 @@ export default function Booking() {
     useEffect(() => {
         const fetchInformation = async () => {
             try {
-                const res = await axios.get(`http://127.0.0.1:8080/api/booking/${productId}/${packageId}`, {
+                const res = await axios.get(`${window.location.origin}/api/booking/${productId}/${packageId}`, {
                     validateStatus: (status) => {
                         return status < 500;
                     }
@@ -76,7 +76,7 @@ export default function Booking() {
     const handleSubmit = async () => {
         const popUp = document.getElementById("booking-popUp");
         try {
-            const res = await axios.post('http://localhost:8080/api/booked', {
+            const res = await axios.post(`${window.location.origin}/api/booked`, {
                 name: reservationInfo.name,
                 number: reservationInfo.number,
                 people: reservationInfo.people,

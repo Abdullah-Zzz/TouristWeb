@@ -32,7 +32,7 @@ export default function Register(){
 
     function handleSubmit(e){
         e.preventDefault()
-        axios.post('http://127.0.0.1:8080/users/register', {name:PostData.name, email:PostData.email, password:PostData.password},{
+        axios.post(`${window.location.origin}/users/register`, {name:PostData.name, email:PostData.email, password:PostData.password},{
             validateStatus : function (status){
                 return status < 500;
             }
