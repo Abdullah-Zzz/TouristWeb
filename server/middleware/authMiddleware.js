@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const JWT_SECRET_KEY = "SuperSecretkey"
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
 
 exports.chkTokenExists = (req, res, next)=>{
     try{
