@@ -8,9 +8,10 @@ export default function Nav() {
 
   const [user, setUser] = React.useState({})
   const [hamValue, sethamValue] = React.useState(true)
+  const Backend_URL = "http://localhost:8080"
 
   const userInfo = async () =>{
-      const res = await axios.get(`http://localhost:8080/users/api/user`,{
+      const res = await axios.get(`${Backend_URL}/users/api/user`,{
         validateStatus: (status) =>{
 
           return status < 500;

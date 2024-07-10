@@ -7,10 +7,11 @@ import Footer from "../Home/Footer/Footer"
 
 export default function Provinces() {
     const [data, setData] = React.useState()
+    const Backend_URL = "http://localhost:8080"
 
     React.useEffect(() => {
         const fetchData = async () => {
-            const res = await axios.get(`${window.location.origin}/api/trips`)
+            const res = await axios.get(`${Backend_URL}/api/trips`)
             const data = res.data;
             setData(data)
         }

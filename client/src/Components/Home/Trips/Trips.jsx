@@ -7,11 +7,12 @@ import React from 'react'
 export default function Trips(){
 
   const [dataTrips, setdataTrips] = React.useState()
-
+  const Backend_URL = "http://localhost:8080"
+  
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/api/trips`);
+        const response = await axios.get(`${Backend_URL}/api/trips`);
         setdataTrips(response.data);
       } catch (err) {
         throw err 

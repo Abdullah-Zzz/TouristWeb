@@ -9,10 +9,12 @@ import PackageCard from "./packageCard";
 export default function Packages() {
     const { productId } = useParams();
     const [data, setdata] = React.useState()
+    const Backend_URL = "http://localhost:8080"
+
     React.useEffect(() => {
 
         const fetchData = async () => {
-            const data = await axios.get(`http://localhost:8080/api/booking/${productId}`, {
+            const data = await axios.get(`${Backend_URL}/api/booking/${productId}`, {
                 validateStatus: (status) => {
                     return status < 500;
                 }

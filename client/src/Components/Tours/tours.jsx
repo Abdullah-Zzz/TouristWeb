@@ -11,12 +11,13 @@ export default function Tours() {
     const [dataTrips, setdataTrips] = React.useState()
     const [search, setSearch] = React.useState("")
     const {productId} =useParams();
+    const Backend_URL = "http://localhost:8080"
 
     React.useEffect(() => {
 
         const fetchData = async () => {
             try {
-                const res = await axios.get(`http://localhost:8080/api/trips/${productId}`,{
+                const res = await axios.get(`${Backend_URL}/api/trips/${productId}`,{
                     validateStatus: (s) =>{
                         return s < 500;
                     }

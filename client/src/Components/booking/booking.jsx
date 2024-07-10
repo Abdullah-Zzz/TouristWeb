@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 import  ImageSlider from "../Slider/ImageSlider";
 import Table from "../inclusionTable/table";
 
-
 export default function Booking() {
     const navigate = useNavigate()
     const cookie = document.cookie
-
+    const Backend_URL = "http://localhost:8080"
+    
     React.useEffect(() => {
         if (!cookie) {  
             navigate('/login')
@@ -33,7 +33,7 @@ export default function Booking() {
     useEffect(() => {
         const fetchInformation = async () => {
             try {
-                const res = await axios.get(`http://localhost:8080/api/booking/${productId}/${packageId}`, {
+                const res = await axios.get(`${Backend_URL}/api/booking/${productId}/${packageId}`, {
                     validateStatus: (status) => {
                         return status < 500;
                     }
@@ -76,7 +76,7 @@ export default function Booking() {
     const handleSubmit = async () => {
         const popUp = document.getElementById("booking-popUp");
         try {
-            const res = await axios.post(`http://localhost:8080/api/booked`, {
+            const res = await axios.post(`${Backend_URL}/api/booked`, {
                 name: reservationInfo.name,
                 number: reservationInfo.number,
                 people: reservationInfo.people,

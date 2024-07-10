@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 export default function Register(){
     const navigate =  useNavigate()
     const cookie = document.cookie
+    const Backend_URL = "http://localhost:8080"
 
     React.useEffect(() =>{
         if(cookie){
@@ -32,7 +33,7 @@ export default function Register(){
 
     function handleSubmit(e){
         e.preventDefault()
-        axios.post(`http://localhost:8080/users/register`, {name:PostData.name, email:PostData.email, password:PostData.password},{
+        axios.post(`${Backend_URL}/users/register`, {name:PostData.name, email:PostData.email, password:PostData.password},{
             validateStatus : function (status){
                 return status < 500;
             }
