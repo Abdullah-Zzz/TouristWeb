@@ -16,7 +16,7 @@ export default function Tours() {
 
         const fetchData = async () => {
             try {
-                const res = await axios.get(`${window.location.origin}/api/trips/${productId}`,{
+                const res = await axios.get(`http://localhost:8080/api/trips/${productId}`,{
                     validateStatus: (s) =>{
                         return s < 500;
                     }

@@ -15,7 +15,7 @@ export default function Customize() {
     React.useEffect(() => {
         const data = async () => {
             try {
-                const req = await axios.get(`${window.location.origin}/api/customized`, {
+                const req = await axios.get(`http://localhost:8080/api/customized`, {
                     validateStatus: (status) => {
                         return status <= 500;
                     }
@@ -92,7 +92,7 @@ export default function Customize() {
     const bookingPackage = async (e) => {
         e.preventDefault()
         try{
-            const req = await axios.post(`${window.location.origin}/api/customized/order`, customizedPackage , {
+            const req = await axios.post(`http://localhost:8080/api/customized/order`, customizedPackage , {
                 validateStatus : function (status) {
                     return status  <= 500
                 }
@@ -131,7 +131,6 @@ export default function Customize() {
           }
         }));
       };
-    console.log(customizedPackage)
     return (
         <>
             <nav>

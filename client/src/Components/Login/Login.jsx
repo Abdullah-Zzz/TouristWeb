@@ -34,7 +34,7 @@ export default function Login() {
 
     function handleSubmit(e){
         e.preventDefault()
-        axios.post(`${window.location.origin}/users/login` , {email:PostData.email, password:PostData.password},{
+        axios.post(`http://localhost:8080/users/login` , {email:PostData.email, password:PostData.password},{
             validateStatus: function (status) {
                 return status < 500; 
             }

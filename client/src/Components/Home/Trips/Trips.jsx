@@ -11,7 +11,7 @@ export default function Trips(){
   React.useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${window.location.origin}/api/trips`);
+        const response = await axios.get(`http://localhost:8080/api/trips`);
         setdataTrips(response.data);
       } catch (err) {
         throw err 

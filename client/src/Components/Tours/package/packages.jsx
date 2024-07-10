@@ -12,7 +12,7 @@ export default function Packages() {
     React.useEffect(() => {
 
         const fetchData = async () => {
-            const data = await axios.get(`${window.location.origin}/api/booking/${productId}`, {
+            const data = await axios.get(`http://localhost:8080/api/booking/${productId}`, {
                 validateStatus: (status) => {
                     return status < 500;
                 }

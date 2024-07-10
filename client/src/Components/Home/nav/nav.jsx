@@ -10,7 +10,7 @@ export default function Nav() {
   const [hamValue, sethamValue] = React.useState(true)
 
   const userInfo = async () =>{
-      const res = await axios.get(`${window.location.origin}/users/api/user`,{
+      const res = await axios.get(`http://localhost:8080/users/api/user`,{
         validateStatus: (status) =>{
 
           return status < 500;
