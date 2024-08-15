@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background: url('https://api.deepai.org/job-view-file/bce88c9c-e62d-4696-bb62-44d8dcd2b590/outputs/output.jpg?art-image=true') no-repeat center center/cover;
+    background: url('/Images/aboutus.jpg') no-repeat center center/cover;
 }
  /* .homeHero-mainContainer::before {
     content: '';
