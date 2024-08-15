@@ -9,7 +9,7 @@
 .homeHero-mainContainer {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 900px;
     background: url('/Images/aboutus.jpg') no-repeat center center/cover;
 }
  /* .homeHero-mainContainer::before {
