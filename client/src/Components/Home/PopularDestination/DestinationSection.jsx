@@ -22,6 +22,8 @@ export default function Destination() {
                         Img1={sect.img1}
                         Img2={sect.img2}
                         key={sect.id}
+                        fade1={sect.fadeDirection1}
+                        fade2={sect.fadeDirection2}
                     />
                 ))
 

@@ -2,8 +2,21 @@ import React from "react"
 import { Link } from "react-router-dom"
 import './HeroAndNav.css'
 import Nav from "../nav/nav"
+import Typed from 'typed.js';
 
 export default function HeroAndNav() {
+    React.useEffect(() => {
+      const options = {
+        strings: ['The Beauty Of Pakistan.'],
+        typeSpeed: 50,
+      };
+      
+      const typed = new Typed('#typed-element', options);
+      
+      return () => {
+        typed.destroy();
+      };
+    }, []);
 
   const [hamValue, sethamValue] = React.useState(true)
   return (
@@ -11,7 +24,7 @@ export default function HeroAndNav() {
       <Nav/>
       <div className='homeHero-mainPara'>
         <h2 className='homeHero-ParaHead'>
-          Explore The Beauty Of Pakistan
+          Explore <span id="typed-element"></span>
         </h2>
         <p className='homeHero-paragraph'>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam odio, vero nulla tempora assumenda aliquid delectus molestias, expedita 
