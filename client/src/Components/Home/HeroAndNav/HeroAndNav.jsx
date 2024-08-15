@@ -11,10 +11,10 @@ export default function HeroAndNav() {
       <Nav/>
       <div className='homeHero-mainPara'>
         <h2 className='homeHero-ParaHead'>
-          Your Journey Your Story
+          Explore The Beauty Of Pakistan
         </h2>
         <p className='homeHero-paragraph'>
-          Choose Your Adventure
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam odio, vero nulla tempora assumenda aliquid delectus molestias, expedita 
         </p>
         <Link to="/trips">
           <button className='homeHero-PlanButton'>

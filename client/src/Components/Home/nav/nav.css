@@ -11,7 +11,7 @@
     justify-content: space-between;
     align-items: center;
     width: 90%;
-    height: 80px;
+    height: 90px;
     border-radius: 15px;
     background-color: white;
     margin-top: 60px;
@@ -41,14 +41,23 @@
     list-style: none;
     justify-content: space-between;
     align-items: center;
+    font-weight: bold;
+    
 }
-
+.navbar-navList ul li a {
+    display: flex;
+    align-items: center;
+}
+.navbar-navList ul li svg {
+    margin-right: 5px;
+}
 .navbar-navList ul li a {
     text-decoration: none;
     color: black;
     cursor: pointer;
     padding: 10px;
     border-radius: 10px;
+    font-size: 17px;
 }
 
 .navbar-navList ul li a:hover {
@@ -61,12 +70,13 @@
 }
 
 .navbar-navBtn {
-    padding: 10px 15px 10px 15px;
+    padding: 15px 20px 15px 20px;
     border: 0px solid;
     border-radius: 3px;
     background-color: rgba(225, 240, 255, 0.756);
     cursor: pointer;
     margin-left: 10px;
+    font-weight: bold;
 }
 .navbar-logoutBtn {
     padding: 10px 15px 10px 15px;
@@ -92,7 +102,7 @@
     background-color: rgba(203, 229, 255, 0.756);
     transition: 0.4s;
 }
-@media screen and (max-width:800px) {
+@media screen and (max-width:900px) {
     .navbar-hamIcon {
         display: inline-block;
         cursor: pointer;
@@ -133,7 +143,11 @@
         cursor: pointer;
         padding: 10px;
         border-radius: 10px;
-
+        display: flex;
+        align-items: center;
+    }
+    .navbar-navListMobile ul li svg {
+        margin-right: 10px;
     }
     .navbar-navListMobile ul {
         display: flex;
