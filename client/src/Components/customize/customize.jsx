@@ -50,7 +50,21 @@ export default function Customize() {
             transportation: "air",
             price: Number
     }})
+//     const [POSTDATA,setPOSTDATA] = React.useState({
+//         userInfo : {
+//             name : customizedPackage.userInfo.name,
+//             phoneNumber:customizedPackage.userInfo.phoneNumber,
+//         },
+//         packageInfo : {
+//             destination: customizedPackage.packageInfo.destination,
+//             people: customizedPackage.packageInfo.people,
+//             rooms: customizedPackage.packageInfo.rooms,
+//             days: customizedPackage.packageInfo.days,
+//             date: customizedPackage.packageInfo.date,
+//             transportation: customizedPackage.packageInfo.transportation
+//     }
 
+//    })
     function onselect(id) {
         if (Count == 0) {
             setprovinces(oldprovinces => oldprovinces.map(province =>
@@ -93,7 +107,22 @@ export default function Customize() {
     const bookingPackage = async (e) => {
         e.preventDefault()
         try{
-            const req = await axios.post(`${Backend_URL}/api/customized/order`, customizedPackage , {
+            const POSTDATA = {
+                userInfo : {
+                    name : customizedPackage.userInfo.name,
+                    phoneNumber:customizedPackage.userInfo.phoneNumber,
+                },
+                packageInfo : {
+                    destination: customizedPackage.packageInfo.destination,
+                    people: customizedPackage.packageInfo.people,
+                    rooms: customizedPackage.packageInfo.rooms,
+                    days: customizedPackage.packageInfo.days,
+                    date: customizedPackage.packageInfo.date,
+                    transportation: customizedPackage.packageInfo.transportation
+            }
+           }
+           console.log(POSTDATA);
+            const req = await axios.post(`${Backend_URL}/api/customized/order`, POSTDATA , {
                 validateStatus : function (status) {
                     return status  <= 500
                 }

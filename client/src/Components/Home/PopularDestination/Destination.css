@@ -11,6 +11,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 60px;
+    overflow-x: hidden;
 }
 
 .popularPlace-destinationsHead {
