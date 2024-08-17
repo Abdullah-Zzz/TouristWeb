@@ -213,7 +213,7 @@ export default function Booking() {
                                     </div>
                                     <div className="booking-total">
                                         <p>Total</p>
-                                        <p>{`${pageInfo && (pageInfo.price * reservationInfo.people ) + (reservationInfo.transportation == "air" ? 3000 : 2000)} PKR`}</p>
+                                        <p>{`${pageInfo && (pageInfo.price * (reservationInfo.people ? reservationInfo.people : 1) ) + (reservationInfo.transportation == "air" ? 3000 : 2000)} PKR`}</p>
                                     </div>
                                 </div>
                                 <button className="booking-booknow">

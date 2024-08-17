@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     height:500px;
-    background: url('/Images/hero.jpg') no-repeat center center/cover;
+    background: url('/Images/aboutus.jpg') no-repeat center center/cover;
 }
 .tours-heroContent{
     height: 250px;
