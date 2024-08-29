@@ -29,7 +29,7 @@
     margin-top: 30px;
     border-radius: 10px;
     padding: 20px 0px 20px 20px;
-    border: 1px solid black;
+    border: 1px solid silver;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -68,18 +68,21 @@
 }
 .booking-description p{
     margin-top: 15px;
+    margin-right: 10px;
 }
 .booking-description li{
     margin-left: 30px;
 }
 .booking-paymentSection{
     width: 35%;
-    border: 1px solid black;
+    border: 1px solid silver;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 830px;
+    position: sticky;
+    top: 20px;
 }
 .booking-cost{
     display: flex;
@@ -204,6 +207,18 @@
 .booking-error{
     color: red;
     font-size: 12px;
+}
+.booking-historyURL{
+    color: black;
+}
+.booking-historyURL:hover{
+    color: rgb(0, 191, 255);
+    transition: 0.4s;
+}
+.booking-history{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
 }
 @media screen and (max-width: 1500px){
     .booking-parentSection{

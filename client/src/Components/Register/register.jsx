@@ -9,12 +9,27 @@ import { useNavigate } from "react-router-dom";
 
 export default function Register(){
     const navigate =  useNavigate()
-    const cookie = document.cookie
     const Backend_URL = "http://localhost:8080"
 
-    React.useEffect(() =>{
-        if(cookie){
-            navigate('/')
+    React.useEffect(()=>{
+        try{
+            const routeProtect = async () => {
+                const req = await axios.get(`${Backend_URL}/users/login`)
+                .then(res =>{
+                    if(res.status == 200){
+                        window.location.reload()
+                        navigate('/')
+                    }
+                } )
+                .catch(err => {
+                    throw err
+                })
+                
+            }
+            routeProtect();
+        }
+        catch(err){
+            throw err
         }
     },[])
 

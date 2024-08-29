@@ -1,6 +1,7 @@
 const tripModel = require("../Schemas/trips")
 const reservationModel = require("../Schemas/reservation")
 const customPackgeModel =  require("../Schemas/customTrip")
+const registModel =  require("../Schemas/Register")
 const customPackageReservationSchema = require("../Schemas/customPackageReservation")
 const { ObjectId } = require('mongoose').Types;
 
@@ -32,7 +33,9 @@ const tripInfo = async (req, res)=>{
 const booked = async (req,res) =>{
     try{
     const {name, number, people, packageName,transportation} = req.body;
+    const userInfo = await registModel.findById(req.id)
     const data = new reservationModel({
+        email:userInfo.email,
         name:name,
         number:number,
         people: people,
@@ -106,6 +109,8 @@ const CustomPackageData = async (req,res) =>{
 const CustomPackageReservation = async(req,res) => {
     try{
         const {userInfo, packageInfo} = req.body
+        const userDetails = await registModel.findById(req.id)
+        userInfo['email'] = userDetails.email
         const data = new customPackageReservationSchema({userInfo, packageInfo})
 
         if(!userInfo || !packageInfo){

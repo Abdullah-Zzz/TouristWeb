@@ -11,13 +11,6 @@ export default function Booking() {
     const navigate = useNavigate()
     const cookie = document.cookie
     const Backend_URL = "http://localhost:8080"
-    
-    React.useEffect(() => {
-        if (!cookie) {  
-            navigate('/login')
-        }
-    }, [])
-
     const [Total, setTotal] = React.useState(1);
     const [pageInfo, setpageInfo] = React.useState()
     const [error, setError] = React.useState("");
@@ -111,7 +104,6 @@ export default function Booking() {
         const popUp = document.getElementById("booking-popUp");
         popUp.style.display = "flex";
     }
-    console.log(reservationInfo)
     return (
         <section className="booking-mainContainer">
             <Nav />
@@ -153,7 +145,12 @@ export default function Booking() {
                                 </p>
                                 <h2>Tour Duration</h2>
                                 <p>The whole tour will be of {pageInfo && pageInfo.duration}.</p>
-
+                                <h2>History</h2>
+                                <p>{pageInfo && pageInfo.big_description}</p>
+                                <div className="booking-history">
+                                <img src="/Images/book.png" />
+                                <a href="#" className="booking-historyURL"><b>Read More About the History of {pageInfo&& pageInfo.city}</b></a>
+                                </div>
                                 {/* <ul>
                                     {pageInfo && pageInfo.details.tour_inclusion.map((para, index) => {
                                         return (
@@ -221,8 +218,6 @@ export default function Booking() {
                                 </button>
                             </form>
                         </div>
-
-
                     </section>
                 </section>
             </section>

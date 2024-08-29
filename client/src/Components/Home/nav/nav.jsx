@@ -11,37 +11,54 @@ export default function Nav() {
   const Backend_URL = "http://localhost:8080"
 
   const userInfo = async () => {
-    const res = await axios.get(`${Backend_URL}/users/api/user`, {
+    const req = await axios.get(`${Backend_URL}/users/api/user`, {
       validateStatus: (status) => {
 
         return status < 500;
       },
       withCredentials: true
     })
-      .catch(err => {
-        console.log(err)
-      })
-    const data = await res.data
-    return data
+    .catch(err => {
+      console.log(err)
+    })
+    const status = req.status
+    if(status == 200){
+
+      const data = req.data
+      return data
+    }
+    else{
+      return {}
+    }
 
   }
   React.useEffect(() => {
-    userInfo().then(data => setUser(data))
+    const cookie = document.cookie
+    if(cookie){
+      userInfo().then(data => setUser(data))
+    }
   }, [])
 
   async function loggingOut() {
     try {
-
-      const cookie = document.cookie;
-      document.cookie = `${cookie}; Max-Age=0; Path=/`
-      location.reload()
-
+        const req = await axios.get(`${Backend_URL}/users/logout`,{
+          validateStatus : (status) => {return status < 500;}
+        }).then(res => {
+          if (res.status === 200){
+            window.location.reload()
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        
     }
     catch (err) {
-      throw err
+      console.log(err)
     }
 
   }
+  console.log(user)
 
   return (
     <nav className={hamValue ? "navbar-nav" : "navbar-navMobile"}>
@@ -68,7 +85,7 @@ export default function Nav() {
 
           <Link to={Object.keys(user).length === 0 ? "/login" : "#"}>
             <button className={Object.keys(user).length === 0 ? "navbar-navBtn" : "navbar-username"}>
-              {Object.keys(user).length === 0 ? "login" : user.user.name}
+              {Object.keys(user).length === 0 ? "login" : user.name}
             </button>
 
           </Link>

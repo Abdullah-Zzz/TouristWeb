@@ -58,7 +58,9 @@
     flex-wrap: nowrap;
 
 }
-
+.popularPlace-destinationPara{
+    font-size: 1.2em;
+}
 .popularPlace-destinationsPhotos img {
     width: 49%;
     height: 350px;

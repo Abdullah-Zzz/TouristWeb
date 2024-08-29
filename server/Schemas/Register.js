@@ -12,7 +12,8 @@ const userSchema=mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    tokens:[{type:Object}]
 })
 
 module.exports = new mongoose.model('userinfos', userSchema)

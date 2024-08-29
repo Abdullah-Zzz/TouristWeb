@@ -8,16 +8,31 @@ import Nav from "../Home/nav/nav"
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-    
-    const navigate =  useNavigate()
-    const cookie = document.cookie
     const Backend_URL = "http://localhost:8080"
+    const navigate =  useNavigate()
 
-    React.useEffect(() =>{
-        if(cookie){
-            navigate('/')
+    React.useEffect(()=>{
+        try{
+            const routeProtect = async () => {
+                const req = await axios.get(`${Backend_URL}/users/login`,{validateStatus : (status) => {return status < 500;}})
+                .then(res =>{
+                    if(res.status == 200){
+                        window.location.reload()
+                        navigate('/')
+                    }
+                } )
+                .catch(err => {
+                    throw err
+                })
+                
+            }
+            routeProtect();
+        }
+        catch(err){
+            throw err
         }
     },[])
+
    
 
     const [errorStyles,seterrorStyles]=React.useState({
@@ -42,8 +57,6 @@ export default function Login() {
         })
         .then(res => {
             if(res.status === 200 ){
-                const token = res.data.token
-                document.cookie=`myCookie=${token} ; Max-Age=3000; Path=/`
                 navigate('/')
                 window.location.reload()
             }

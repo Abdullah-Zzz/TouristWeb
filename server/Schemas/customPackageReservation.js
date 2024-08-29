@@ -2,6 +2,10 @@ const mongoose = require("mongoose")
 
 const customPackageSchema = mongoose.Schema({
     userInfo : {
+        email:{
+            type :String,
+            required : true
+        },
         name : {
             type :String,
             required : true

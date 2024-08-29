@@ -52,5 +52,21 @@
             { "id": 305, "name": "Swat Valley", "price": 25000, "perRoom": 6700, "perDay": 420, "selected": false, "image" : "https://www.ajktours.com/wp-content/uploads/2023/12/swat-hills.jpg" },
             { "id": 306, "name": "Chitral", "price": 26000, "perRoom": 7000, "perDay": 440, "selected": false, "image" : "https://i0.wp.com/hindukushheights.com/wp-content/uploads/2023/02/kalash-valley-1.jpg?ssl=1" }
         ]
+    },
+    {
+        "value": "kashmir",
+        "selected": false,
+        "id": 4,
+        "price": 14000,
+        "perRoom": 1400,
+        "perDay": 1400,
+        "places": [
+            { "id": 401, "name": "neelum valley", "price": 30000, "perRoom": 8000, "perDay": 500, "selected": false , "image" : "https://images.trvl-media.com/lodging/83000000/82810000/82808500/82808451/3ce92f1b.jpg?impolicy=resizecrop&rw=1200&ra=fit"},
+            { "id": 402, "name": "tolipir", "price": 32000, "perRoom": 8500, "perDay": 550, "selected": false, "image" : "https://www.karakorumexpedition.com/wp-content/uploads/810_3442.jpg" },
+            { "id": 403, "name": "kala", "price": 28000, "perRoom": 7500, "perDay": 480, "selected": false, "image" : "https://cdn.offtheatlas.com/wp-content/uploads/2021/09/07043754/DJI_0347-1.jpg" },
+            { "id": 404, "name": "rawalakot", "price": 27000, "perRoom": 7200, "perDay": 460, "selected": false, "image" : "https://img.freepik.com/free-photo/hiking-men-conquer-mountain-peak-adventure-awaits-generative-ai_188544-7877.jpg" },
+            { "id": 405, "name": "pooonch", "price": 25000, "perRoom": 6700, "perDay": 420, "selected": false, "image" : "https://www.ajktours.com/wp-content/uploads/2023/12/swat-hills.jpg" },
+            { "id": 406, "name": "topi", "price": 26000, "perRoom": 7000, "perDay": 440, "selected": false, "image" : "https://i0.wp.com/hindukushheights.com/wp-content/uploads/2023/02/kalash-valley-1.jpg?ssl=1" }
+        ]
     }
 ]
