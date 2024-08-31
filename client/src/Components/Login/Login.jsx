@@ -82,7 +82,8 @@ export default function Login() {
                             <label className="errorMsg" style={errorStyles}>{errorMessage}</label>
                             <input type="email" placeholder="Email" name="email" required onChange={(e) => setPostData({...PostData, email:e.target.value})}/>
                             <input type="password" placeholder="Password" name="password" required onChange={(e) => setPostData({...PostData, password:e.target.value})}/>
-                            <button className="subBtn">Login</button>
+                          <a href="/reset-password" className="login-forgotPass">Forgot Your Pass?</a>  
+                          <button className="subBtn">Login</button>
                         </form>
                         <p>Register <Link to="/register"> Here</Link></p>
                     </div>

@@ -31,7 +31,7 @@ const verifyToken = (req, res, next) =>{
                 }
                 else{
                     const chkTokenExpired = await registModel.findOne({_id : user.id})
-                    if(chkTokenExpired.tokens[0].token && chkTokenExpired.tokens[0].token == token){
+                    if(chkTokenExpired.tokens.length == 1 && chkTokenExpired.tokens[0].token == token){
 
                         req.id = user.id
                         next();

@@ -13,7 +13,8 @@ const userSchema=mongoose.Schema({
         type:String,
         required:true
     },
-    tokens:[{type:Object}]
+    tokens:[{type:Object}],
+    resetlink:{type:Object}
 })
 
 module.exports = new mongoose.model('userinfos', userSchema)

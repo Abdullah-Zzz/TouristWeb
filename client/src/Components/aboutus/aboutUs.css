@@ -35,6 +35,9 @@
     font-size:18px;  
     margin-top: 20px;  
 }
+.aboutus-body{
+    margin-bottom: 50px;
+}
 @media screen and (max-width:750px){
     .ourHistory,
     .ourVision,

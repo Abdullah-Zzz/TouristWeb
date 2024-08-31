@@ -44,7 +44,7 @@ export default function Nav() {
         const req = await axios.get(`${Backend_URL}/users/logout`,{
           validateStatus : (status) => {return status < 500;}
         }).then(res => {
-          if (res.status === 200){
+          if (res.status === 200 || res.status === 404 || res.status == 401){
             window.location.reload()
           }
         })
@@ -58,7 +58,6 @@ export default function Nav() {
     }
 
   }
-  console.log(user)
 
   return (
     <nav className={hamValue ? "navbar-nav" : "navbar-navMobile"}>

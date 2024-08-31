@@ -44,6 +44,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-bottom: 80px;
 }
 .tours-viewMoreBtn{
     padding: 15px 35px 15px 35px;

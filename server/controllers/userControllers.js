@@ -1,6 +1,9 @@
 const model = require("../Schemas/Register")
 const jwt = require("jsonwebtoken")
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
+const PASS = process.env.PASS
+const EMAIL = process.env.EMAIL
+const nodeMailer = require('nodemailer')
 
 const getUser = async (req,res,next)=>{
     try{
@@ -120,6 +123,89 @@ const routeRegist = async (req, res) =>{
         res.status(500).json("internal server error")
     }
 }
+const sendEmail = async (req, res) =>{
+    try{
+        const {email} = req.body
+        const userExists = await model.findOne({email})
+    
+        if(!email){
+            res.status(404).json('Email not found')
+        }
+        if(!userExists){
+            res.status(404).json('User not found')
+        }
+        else{
+            const token = jwt.sign({id:userExists._id},JWT_SECRET_KEY, {
+                expiresIn:'1d'
+            } )
+            await model.findByIdAndUpdate(userExists._id, {resetlink:{token:token}})
+            const transporter = nodeMailer.createTransport({
+                service :'gmail',
+                auth : {
+                    user:EMAIL,
+                    pass:PASS
+                }
+            })
+            const mailOptions = {
+                from:EMAIL,     
+                to: email,
+                subject: 'Reset Pass',
+                text: `http://localhost:5173/${userExists._id}/${token}`
+            }
+            transporter.sendMail(mailOptions, (err, info) => {
+                if(err){
+                    res.status(404).json('Email Not Found')
+                }
+                else{
+                    res.status(200).json('Email Sent')
+                }
+            })
+        }
+    }
+    catch(err){
+        res.status(500).json('Internal server error')
+    }
+}
+const resetPass = async (req, res) => {
+    try{
+
+        const token = req.params.token
+        const {password, confirmPass} = req.body
+        let id = String
+        if(password && password != confirmPass){
+            res.status(409).json('Passwords donot matach.')
+        }
+        else{
+            jwt.verify(String(token), JWT_SECRET_KEY , (err, user) => {
+                if (err){
+                    res.status(403).json('Not Authorized')
+                }
+                else{
+                    id = user.id
+                }
+            })
+            const userDetails = await model.findById(id)
+            if(!userDetails){
+                res.status(404).json("Invalid Token, please generate a new reset link.")
+            }
+            else{
+                console.log(token)
+                if(userDetails.resetlink.token == token){
+                    await model.findByIdAndUpdate(id, {password: password})
+                    await model.findByIdAndUpdate(id, {resetlink:{}})
+                    res.status(200).json('Password Changed')
+                }
+                else{
+                    res.status(404).json("Link already used, please generate a new reset link.")
+                }
+
+            }
+        }
+    }
+    catch(err){
+        res.status(500).json('Internal server error')
+    }
+}
 module.exports = {
     getUser,
     loginUser,
@@ -127,4 +213,6 @@ module.exports = {
     logout,
     routeLogin,
     routeRegist,
+    sendEmail,
+    resetPass
 };

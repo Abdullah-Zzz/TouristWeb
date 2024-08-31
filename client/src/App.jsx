@@ -10,6 +10,8 @@ import Packages from "./Components/Tours/package/packages"
 import Provinces from "./Components/provinces/provinces"
 import Customize from "./Components/customize/customize"
 import Table from "./Components/inclusionTable/table"
+import ResetPass  from "./Components/resetpass/resetpass"
+import SetNewPass from "./Components/newpass/setNewPass"
 
 function App() {
   const cookie = document.cookie;
@@ -26,6 +28,8 @@ function App() {
         <Route path="/customize" element={<Customize />} />
         <Route path="/table" element={<Table />}/>
         <Route path="*" element={<NotFound />}/>
+        <Route path="/reset-password" element={<ResetPass />} />
+        <Route path="/:id/:token" element={<SetNewPass />} />
     </Routes>
   )
 }
