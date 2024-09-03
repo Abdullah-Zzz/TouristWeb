@@ -6,13 +6,36 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function ResetPass() {
+    const navigate = useNavigate()
+    const backendURL  = 'http://localhost:8080'
+
+    React.useEffect(()=>{
+        const routeProtect = () =>{
+            try{
+                const req = axios.get(`${backendURL}/users/login`)
+                .then(res =>{   
+                    if(res.status == 200){
+                        window.location.reload()
+                        navigate('/')
+                    }
+                })
+                .catch(err =>{
+                    console.log(err)
+                })
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        routeProtect();
+    },[])
+
     const [input , setInput] = React.useState("")
     const [respMessage, setRespMessage] = React.useState("")
-    const backendURL  = 'http://localhost:8080/'
 
     const sendingMail =async (e) => {
         e.preventDefault()
-        const req = await axios.post(`${backendURL}users/resetpass`, {email:input}, {
+        const req = await axios.post(`${backendURL}/users/resetpass`, {email:input}, {
             validateStatus : function (status) {
                 return status < 500;
             }

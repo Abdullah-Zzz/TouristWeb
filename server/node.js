@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 require('dotenv').config();
 const userRoute = require("./routes/user")
 const tripRoute = require("./routes/trips")
+const commentRoute = require("./routes/commentRoute")
 
 
 const app=express();
@@ -19,6 +20,7 @@ app.use(cors({
 
 app.use('/users', userRoute)
 app.use('/api', tripRoute)
+app.use('/comments', commentRoute)
 
 app.listen(port,() =>{
     console.log("running...")

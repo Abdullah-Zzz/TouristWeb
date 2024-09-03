@@ -11,12 +11,33 @@ export default function SetNewPass() {
     const [confirmPass , setConfirmPass] = React.useState("")
     const [respMessage, setRespMessage] = React.useState("")
     const backendURL  = 'http://localhost:8080'
-    const param = useParams()
+    const {id, token} = useParams()
     const navigate = useNavigate()
+    
+    React.useEffect(() =>{
+        const routeProtect = async () =>{
+            try{
+
+                const res = await axios.get(`${backendURL}/users/${id}/${token}`,{
+                    validateStatus : (status) =>{
+                        return status < 500
+                    }
+                })
+                if(res.status != 200){
+                    window.location.reload()
+                    navigate('/')
+                }
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+        routeProtect();
+    },[])
 
     const changingPass =async (e) => {
         e.preventDefault()
-        const req = await axios.post(`${backendURL}/users/${param.token}`, {password:pass,confirmPass:confirmPass}, {
+        const req = await axios.post(`${backendURL}/users/${id}/${token}`, {password:pass,confirmPass:confirmPass}, {
             validateStatus : function (status) {
                 return status < 500;
             }
@@ -26,7 +47,7 @@ export default function SetNewPass() {
                 setRespMessage(res.data)
                 setTimeout(() => {
                     navigate('/login')
-                }, 1000)
+                }, 1500)
             }
             else{
                 setRespMessage(res.data)

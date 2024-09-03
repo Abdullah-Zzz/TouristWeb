@@ -4,12 +4,11 @@ import "./booking.css"
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import  ImageSlider from "../Slider/ImageSlider";
+import ImageSlider from "../Slider/ImageSlider";
 import Table from "../inclusionTable/table";
 
 export default function Booking() {
     const navigate = useNavigate()
-    const cookie = document.cookie
     const Backend_URL = "http://localhost:8080"
     const [Total, setTotal] = React.useState(1);
     const [pageInfo, setpageInfo] = React.useState()
@@ -19,10 +18,14 @@ export default function Booking() {
         name: "",
         number: Number,
         people: 0,
-        packageName :'',
-        transportation :"air"
+        packageName: '',
+        transportation: "air"
     })
     const [bookedInfo, setbookedInfo] = React.useState("")
+    const [comments, setComments] = React.useState()
+    const [addComment, setAddComment] = React.useState("")
+    const [commentError,setCommentError] = React.useState("")
+    const [rating, setRating] = React.useState(3)
     useEffect(() => {
         const fetchInformation = async () => {
             try {
@@ -31,8 +34,8 @@ export default function Booking() {
                         return status < 500;
                     }
                 })
-                const data = res.data.mainData[0].packages.filter((pack) =>{
-                  return pack.id === packageId 
+                const data = res.data.mainData[0].packages.filter((pack) => {
+                    return pack.id === packageId
                 })
                 setpageInfo(data[0])
             }
@@ -42,7 +45,27 @@ export default function Booking() {
         }
         fetchInformation();
     }, [productId])
-
+    useEffect(() => {
+        const fetchInformation = async () => {
+            try {
+                const res = await axios.get(`${Backend_URL}/comments/${packageId}`, {
+                    validateStatus: (status) => {
+                        return status < 500;
+                    }
+                })
+                if (res.status == 200) {
+                    setComments(res.data)
+                }
+                else {
+                    setComments('')
+                }
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        fetchInformation();
+    }, [])
     function settingInput(event) {
         const name = event.target.name;
         const value = event.target.value
@@ -73,20 +96,20 @@ export default function Booking() {
                 name: reservationInfo.name,
                 number: reservationInfo.number,
                 people: reservationInfo.people,
-                packageName :pageInfo && pageInfo.package_name,
-                transportation : reservationInfo.transportation
+                packageName: pageInfo && pageInfo.package_name,
+                transportation: reservationInfo.transportation
             }, {
                 validateStatus: (status) => {
                     return status < 500;
                 }
             })
-            if(res.status == 200){
+            if (res.status == 200) {
                 const data = res.data
                 setError("")
                 setbookedInfo(data)
             }
-            else{
-                const data = res.data 
+            else {
+                const data = res.data
                 popUp.style.display = "none";
                 setError(data)
             }
@@ -104,26 +127,47 @@ export default function Booking() {
         const popUp = document.getElementById("booking-popUp");
         popUp.style.display = "flex";
     }
+    const POSTCOMMENT =async (e) =>{
+        e.preventDefault()
+        try{
+            const res = await axios.post(`${Backend_URL}/comments/${packageId}`,{
+                    comment:addComment,
+                    rating:rating
+            },{
+                validateStatus:(status) =>{
+                    return status < 500;
+                }
+            })
+            setCommentError(res.data)
+            if(res.status == 200){
+                window.location.reload()
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+    console.log(commentError)
     return (
         <section className="booking-mainContainer">
             <Nav />
             < div className="booking-popUp" id="booking-popUp">
-                    <div className="booking-confirmation">
-                        <p>
-                            {bookedInfo === "" ? "Are you sure you want to book this trip?" : bookedInfo}
-                        </p>
-                    </div>
-                    <div className="booking-popUpButtons">
-                        {bookedInfo === "" ? <button className="booking-popUp-cancelbtn" onClick={popupCancel}>Cancel</button> : null}
-                        {bookedInfo === "" ? <button className="booking-popUp-okbtn" onClick={handleSubmit}>Ok</button> : <button className="booking-popUp-bookedOkbtn" onClick={(e) => { setbookedInfo(""); popupCancel(e) }}>Ok</button>}
-                    </div>
+                <div className="booking-confirmation">
+                    <p>
+                        {bookedInfo === "" ? "Are you sure you want to book this trip?" : bookedInfo}
+                    </p>
                 </div>
+                <div className="booking-popUpButtons">
+                    {bookedInfo === "" ? <button className="booking-popUp-cancelbtn" onClick={popupCancel}>Cancel</button> : null}
+                    {bookedInfo === "" ? <button className="booking-popUp-okbtn" onClick={handleSubmit}>Ok</button> : <button className="booking-popUp-bookedOkbtn" onClick={(e) => { setbookedInfo(""); popupCancel(e) }}>Ok</button>}
+                </div>
+            </div>
             <section className="booking-body">
-                
+
                 <section className="booking-parentSection">
                     <section className="booking-infoSection">
                         <div className="booking-mainImage" >
-                          {pageInfo && <ImageSlider imageURLs={pageInfo && pageInfo.image_url} /> }
+                            {pageInfo && <ImageSlider imageURLs={pageInfo && pageInfo.image_url} />}
                         </div>
                         <section className="booking-information">
                             <h2 className="booking-name">{pageInfo && pageInfo.package_name}</h2>
@@ -148,8 +192,8 @@ export default function Booking() {
                                 <h2>History</h2>
                                 <p>{pageInfo && pageInfo.big_description}</p>
                                 <div className="booking-history">
-                                <img src="/Images/book.png" />
-                                <a href="#" className="booking-historyURL"><b>Read More About the History of {pageInfo&& pageInfo.city}</b></a>
+                                    <img src="/Images/book.png" />
+                                    <a href="#" className="booking-historyURL"><b>Read More About the History of {pageInfo && pageInfo.city}</b></a>
                                 </div>
                                 {/* <ul>
                                     {pageInfo && pageInfo.details.tour_inclusion.map((para, index) => {
@@ -174,13 +218,49 @@ export default function Booking() {
                                         )
                                     })}
                                 </ul> */}
-                                <Table 
+                                <Table
                                     inclusion={pageInfo && pageInfo.details.tour_inclusion}
-                                    exclusion = {pageInfo && pageInfo.details.tour_exclusion}
-                                    itinerary = {pageInfo && pageInfo.details.tour_itinerary}
+                                    exclusion={pageInfo && pageInfo.details.tour_exclusion}
+                                    itinerary={pageInfo && pageInfo.details.tour_itinerary}
                                 />
                             </div>
+                            <section className="booking-commentSection">
+                                <h1>Comments</h1>
+                                <span className="booking-commentError">{commentError && commentError}</span>
+                                <form method="POST" className="booking-commentForm" onSubmit={(e) => POSTCOMMENT(e)}>
+                                    <div className="booking-commentFormInputAndButton">
+                                        <input type="text" placeholder="Enter A Comment" className="booking-commentInput" onChange={(e) => setAddComment(e.target.value)} required/>
+                                        <button className="booking-commentButton" type="submit">
+                                            Add
+                                        </button>
+                                    </div>
+                                    <div className="booking-commentFormRating">
+                                        <h2>Rating: </h2>
+                                        <select className="booking-commentSetRating" onChange={(e) => setRating(parseInt(e.target.value))} required>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </form>
+                               
+                                {comments ? comments.comments.map(comment => {
+                                   return (<div className="booking-comment">
+                                        <div className="booking-commentWriter">
+                                            {comment.createdBy}
+                                        </div>
+                                        <div className="booking-commentDetails">
+                                            <p className="booking-commentDate">{comment.createdAt} | <span className="booking-commentRating">{comment.rating}<img src="/Images/star.png" /></span></p>
+                                        </div>
+                                        <div className="booking-commentText">
+                                            {comment.comment}
+                                        </div>
+                                    </div>)
+                                }) : <div className="booking-NoComment">No Comments</div>
+                                }
+                            </section>
                         </section>
+
                     </section>
                     <section className="booking-paymentSection">
                         <div className="booking-cost">
@@ -193,7 +273,7 @@ export default function Booking() {
                                 <input name="name" type="text" placeholder="Full Name" onChange={settingInput} required />
                                 <input name="number" type="number" min="1111111111" max="9999999999" placeholder="Phone" onChange={settingInput} required />
                                 <input name="people" type="number" min="1" max="10" placeholder="No of People ( max 10 )" onChange={totalPrice} onInput={handleInput} required />
-                                <select name="custom-transport" className="custom-transport" onChange={(e) => setreservationInfo(oldInfo => ({...oldInfo, transportation: e.target.value}))} required>
+                                <select name="custom-transport" className="custom-transport" onChange={(e) => setreservationInfo(oldInfo => ({ ...oldInfo, transportation: e.target.value }))} required>
                                     <option value="air">By Air</option>
                                     <option value="road">By Road</option>
                                 </select>
@@ -210,7 +290,7 @@ export default function Booking() {
                                     </div>
                                     <div className="booking-total">
                                         <p>Total</p>
-                                        <p>{`${pageInfo && (pageInfo.price * (reservationInfo.people ? reservationInfo.people : 1) ) + (reservationInfo.transportation == "air" ? 3000 : 2000)} PKR`}</p>
+                                        <p>{`${pageInfo && (pageInfo.price * (reservationInfo.people ? reservationInfo.people : 1)) + (reservationInfo.transportation == "air" ? 3000 : 2000)} PKR`}</p>
                                     </div>
                                 </div>
                                 <button className="booking-booknow">
