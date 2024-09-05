@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function ResetPass() {
     const navigate = useNavigate()
-    const backendURL  = 'http://localhost:8080'
+    const Backend_URL = import.meta.env.VITE_BACKEND_URL
 
     React.useEffect(()=>{
         const routeProtect = () =>{
             try{
-                const req = axios.get(`${backendURL}/users/login`)
+                const req = axios.get(`${Backend_URL}/users/login`)
                 .then(res =>{   
                     if(res.status == 200){
                         window.location.reload()
@@ -35,7 +35,7 @@ export default function ResetPass() {
 
     const sendingMail =async (e) => {
         e.preventDefault()
-        const req = await axios.post(`${backendURL}/users/resetpass`, {email:input}, {
+        const req = await axios.post(`${Backend_URL}/users/resetpass`, {email:input}, {
             validateStatus : function (status) {
                 return status < 500;
             }

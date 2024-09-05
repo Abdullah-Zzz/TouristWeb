@@ -7,7 +7,7 @@ import Footer from "../Home/Footer/Footer"
 
 export default function Provinces() {
     const [data, setData] = React.useState()
-    const Backend_URL = "http://localhost:8080"
+    const Backend_URL = import.meta.env.VITE_BACKEND_URL
 
     React.useEffect(() => {
         const fetchData = async () => {

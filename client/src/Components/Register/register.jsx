@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Register(){
     const navigate =  useNavigate()
-    const Backend_URL = "http://localhost:8080"
+    const Backend_URL = import.meta.env.VITE_BACKEND_URL
 
     React.useEffect(()=>{
         try{

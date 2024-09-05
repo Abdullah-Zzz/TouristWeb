@@ -11,7 +11,7 @@ export default function Tours() {
     const [dataTrips, setdataTrips] = React.useState()
     const [search, setSearch] = React.useState("")
     const {productId} =useParams();
-    const Backend_URL = "http://localhost:8080"
+    const Backend_URL = import.meta.env.VITE_BACKEND_URL
 
     React.useEffect(() => {
 

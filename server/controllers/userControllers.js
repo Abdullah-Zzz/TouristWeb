@@ -52,6 +52,7 @@ const loginUser = async (req, res) => {
                 })
                 res.status(200).json({
                     message: "Logged In",
+                    token:JWT_TOKEN
                 })
 
             }
@@ -133,7 +134,7 @@ const sendEmail = async (req, res) => {
             const transporter = nodeMailer.createTransport({
                 service: 'gmail',
                 auth: {
-                    user: EMAIL,
+                    user: EMAIL,    
                     pass: PASS
                 }
             })
@@ -148,7 +149,7 @@ const sendEmail = async (req, res) => {
                     res.status(404).json('Email Not Found')
                 }
                 else {
-                    res.status(200).json('Email Sent')
+                    res.status(200).json('The email will be sent to your account if you are registered with us')
                 }
             })
         }

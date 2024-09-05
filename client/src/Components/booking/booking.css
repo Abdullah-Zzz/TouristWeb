@@ -222,7 +222,7 @@
     align-items: center;
 }
 .booking-commentSection{
-    margin-top: 10px;
+    margin-top: 40px;
 }
 .booking-commentSection h1{
     font-size: 30px;
@@ -234,26 +234,34 @@
     margin-top: 10px;
 }
 .booking-commentInput{
-    width: 80%;
-    height: 50px;
-    border-radius:45px;
-    border: 1px solid black;
+    width: 100%;
+    height: 150px;
+    border: 1px solid silver;
     padding-left: 10px;
+    padding-top: 10px;
+    text-align: left;
+    vertical-align: top;
 }
 .booking-commentButton{
     width: 100px;
+    height: 50px;
+    margin-top: 20px;
 }
 .booking-comment{
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
+    margin-top: 40px;
+    border-bottom: 1px solid silver;
+    padding-bottom: 20px;
+    width: 98%;
+
 }
 .booking-commentWriter{
     font-size: 18px;
     font-weight: bold;
 }
 .booking-commentDate{
-    font-size: 13px;
+    font-size: 15px;
     color: gray ;
 }
 .booking-NoComment{
@@ -265,12 +273,7 @@
 .booking-commentError{
     color: red;
 }
-.booking-commentFormInputAndButton{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
 
-}
 .booking-commentFormRating{
     display: flex;
     margin-top: 20px;
@@ -293,8 +296,27 @@
 }
 .booking-commentRating img{
     margin-left: 5px;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 15x;
+}
+.booking-commentRatingStars{
+    display: flex;
+    margin:10px 0px 20px 0px ;
+    align-items: center;
+}
+.booking-commentRatingHead{
+    margin-right: 10px;
+    font-weight: bold;
+}
+.booking-commentRatingStarsDiv{
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.booking-commentText{
+   margin-top: 10px;
 }
 @media screen and (max-width: 1500px){
     .booking-parentSection{

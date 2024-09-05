@@ -8,7 +8,7 @@ export default function Nav() {
 
   const [user, setUser] = React.useState({})
   const [hamValue, sethamValue] = React.useState(true)
-  const Backend_URL = "http://localhost:8080"
+  const Backend_URL = import.meta.env.VITE_BACKEND_URL
 
   const userInfo = async () => {
     const req = await axios.get(`${Backend_URL}/users/api/user`, {

@@ -11,7 +11,7 @@ export default function Customize() {
     const [error, setError] = React.useState('') 
     const [imageSrc, setImageSrc] = React.useState()
     const [customPopUpData, setCustomPopUpData] = React.useState("")
-    const Backend_URL = "http://localhost:8080"
+    const Backend_URL = import.meta.env.VITE_BACKEND_URL
 
     React.useEffect(() => {
         const data = async () => {

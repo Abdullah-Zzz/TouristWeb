@@ -14,7 +14,7 @@ const port=process.env.PORT || 8080;
 app.use(cookieParser())
 app.use(express.json())
 app.use(cors({
-   origin:"http://localhost:5173",
+   origin:"http://192.168.0.107:5173",
    credentials:true
 }))
 
@@ -22,6 +22,6 @@ app.use('/users', userRoute)
 app.use('/api', tripRoute)
 app.use('/comments', commentRoute)
 
-app.listen(port,() =>{
+app.listen(port, () =>{
     console.log("running...")
 })

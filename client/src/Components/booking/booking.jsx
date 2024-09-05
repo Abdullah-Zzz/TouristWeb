@@ -9,7 +9,7 @@ import Table from "../inclusionTable/table";
 
 export default function Booking() {
     const navigate = useNavigate()
-    const Backend_URL = "http://localhost:8080"
+    const Backend_URL = import.meta.env.VITE_BACKEND_URL
     const [Total, setTotal] = React.useState(1);
     const [pageInfo, setpageInfo] = React.useState()
     const [error, setError] = React.useState("");
@@ -147,7 +147,7 @@ export default function Booking() {
             console.log(err)
         }
     }
-    console.log(commentError)
+    console.log(rating)
     return (
         <section className="booking-mainContainer">
             <Nav />
@@ -225,25 +225,36 @@ export default function Booking() {
                                 />
                             </div>
                             <section className="booking-commentSection">
-                                <h1>Comments</h1>
+                                <h1>Add A Comment</h1>
                                 <span className="booking-commentError">{commentError && commentError}</span>
+                                    <div className="booking-commentRatingStars">
+                                      <p className="booking-commentRatingHead">
+                                        please Rate our package:
+                                       </p>
+                                        {
+                                            new Array(5).fill(null).map((_, index) => {
+                                               return(
+                                                 <div className="booking-commentRatingStarsDiv" key={index+1} onClick={(e) => setRating(index+1)} >
+                                                    {rating >= index+1 ? <img src="/Images/star.png" /> : <img src="/Images/starEmpty.png" />}
+                                                </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 <form method="POST" className="booking-commentForm" onSubmit={(e) => POSTCOMMENT(e)}>
-                                    <div className="booking-commentFormInputAndButton">
-                                        <input type="text" placeholder="Enter A Comment" className="booking-commentInput" onChange={(e) => setAddComment(e.target.value)} required/>
+                                <textarea className="booking-commentInput" placeholder="Your Comment" onChange={(e) =>setAddComment(e.target.value)} required></textarea>
                                         <button className="booking-commentButton" type="submit">
                                             Add
                                         </button>
-                                    </div>
-                                    <div className="booking-commentFormRating">
+                                    {/* <div className="booking-commentFormRating">
                                         <h2>Rating: </h2>
                                         <select className="booking-commentSetRating" onChange={(e) => setRating(parseInt(e.target.value))} required>
                                             <option value="3">3</option>
                                             <option value="4">4</option>
                                             <option value="5">5</option>
                                         </select>
-                                    </div>
+                                    </div> */}
                                 </form>
-                               
                                 {comments ? comments.comments.map(comment => {
                                    return (<div className="booking-comment">
                                         <div className="booking-commentWriter">
@@ -260,7 +271,6 @@ export default function Booking() {
                                 }
                             </section>
                         </section>
-
                     </section>
                     <section className="booking-paymentSection">
                         <div className="booking-cost">

@@ -7,7 +7,7 @@ import React from 'react'
 export default function Trips(){
 
   const [dataTrips, setdataTrips] = React.useState()
-  const Backend_URL = "http://localhost:8080"
+  const Backend_URL = import.meta.env.VITE_BACKEND_URL
   
   React.useEffect(() => {
     const fetchData = async () => {

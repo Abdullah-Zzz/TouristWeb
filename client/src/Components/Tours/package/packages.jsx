@@ -9,7 +9,7 @@ import PackageCard from "./packageCard";
 export default function Packages() {
     const { productId } = useParams();
     const [data, setdata] = React.useState()
-    const Backend_URL = "http://localhost:8080"
+    const Backend_URL = import.meta.env.VITE_BACKEND_URL
 
     React.useEffect(() => {
 

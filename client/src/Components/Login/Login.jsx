@@ -8,15 +8,16 @@ import Nav from "../Home/nav/nav"
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-    const Backend_URL = "http://localhost:8080"
+    const Backend_URL = import.meta.env.VITE_BACKEND_URL
     const navigate =  useNavigate()
 
     React.useEffect(()=>{
         try{
             const routeProtect = async () => {
-                const req = await axios.get(`${Backend_URL}/users/login`,{validateStatus : (status) => {return status < 500;}})
+                const req = await axios.get(`${Backend_URL}/users/login`,{validateStatus : (status) => {return status < 500;},withCredentials:true})
                 .then(res =>{
                     if(res.status == 200){
+                        
                         window.location.reload()
                         navigate('/')
                     }
@@ -57,6 +58,7 @@ export default function Login() {
         })
         .then(res => {
             if(res.status === 200 ){
+                document.cookie = `myCookie=${res.data.token}; max-age=600; path=/`;
                 navigate('/')
                 window.location.reload()
             }
