@@ -11,31 +11,6 @@ export default function Login() {
     const Backend_URL = import.meta.env.VITE_BACKEND_URL
     const navigate =  useNavigate()
 
-    React.useEffect(()=>{
-        try{
-            const routeProtect = async () => {
-                const req = await axios.get(`${Backend_URL}/users/login`,{validateStatus : (status) => {return status < 500;},withCredentials:true})
-                .then(res =>{
-                    if(res.status == 200){
-                        
-                        window.location.reload()
-                        navigate('/')
-                    }
-                } )
-                .catch(err => {
-                    throw err
-                })
-                
-            }
-            routeProtect();
-        }
-        catch(err){
-            throw err
-        }
-    },[])
-
-   
-
     const [errorStyles,seterrorStyles]=React.useState({
         color:"rgb(200,0,0)",
         display:"inline",

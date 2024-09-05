@@ -318,10 +318,15 @@
 .booking-commentText{
    margin-top: 10px;
 }
+.booking-commentRatingAllStarsDiv{
+    display: flex;
+    flex-direction: row;
+}
 @media screen and (max-width: 1500px){
     .booking-parentSection{
         width: 90%;
     }
+
     
 }
 @media screen and (max-width: 1330px) {
@@ -377,6 +382,18 @@
     .booking-popUp{
         width: 80%;
     }
+}
+@media screen and (max-width: 510px){
+    .booking-commentRatingStars{
+        flex-direction: column;
+        align-items: start;
+    }
+   .booking-commentRatingAllStarsDiv{
+        display: flex;
+        margin : 20px 0px 20px 0px;
+        width: 100%;
+        justify-content: space-between;
+   }
 }
 @media screen and (max-width: 450px) {
     .booking-name{

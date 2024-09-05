@@ -9,27 +9,6 @@ export default function ResetPass() {
     const navigate = useNavigate()
     const Backend_URL = import.meta.env.VITE_BACKEND_URL
 
-    React.useEffect(()=>{
-        const routeProtect = () =>{
-            try{
-                const req = axios.get(`${Backend_URL}/users/login`)
-                .then(res =>{   
-                    if(res.status == 200){
-                        window.location.reload()
-                        navigate('/')
-                    }
-                })
-                .catch(err =>{
-                    console.log(err)
-                })
-            }
-            catch(err){
-                console.log(err)
-            }
-        }
-        routeProtect();
-    },[])
-
     const [input , setInput] = React.useState("")
     const [respMessage, setRespMessage] = React.useState("")
 

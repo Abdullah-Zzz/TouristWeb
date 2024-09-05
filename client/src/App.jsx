@@ -12,14 +12,20 @@ import Customize from "./Components/customize/customize"
 import Table from "./Components/inclusionTable/table"
 import ResetPass  from "./Components/resetpass/resetpass"
 import SetNewPass from "./Components/newpass/setNewPass"
+import {LoginRouteProtect, SetPassRouteProtect} from "./utils/protectedRoutes"
 
 function App() {
   const cookie = document.cookie;
   return (
     <Routes>
         <Route path="/" element={<Home />}/>
-        <Route path="/login" element={<Login />}/>
-        <Route path="/register" element={<Register />} />
+
+        <Route element={<LoginRouteProtect />} >
+          <Route path="/login" element={<Login />}/>
+          <Route path="/register" element={<Register />} />
+          <Route path="/reset-password" element={<ResetPass />} />
+        </Route>
+        
         <Route path="/trips" element={<Provinces />} />
         <Route path="/trips/:productId" element={<Tours />} />
         <Route path="/booking/:productId" element={<Packages />} />
@@ -28,8 +34,11 @@ function App() {
         <Route path="/customize" element={<Customize />} />
         <Route path="/table" element={<Table />}/>
         <Route path="*" element={<NotFound />}/>
-        <Route path="/reset-password" element={<ResetPass />} />
-        <Route path="/:id/:token" element={<SetNewPass />} />
+
+        <Route element={<SetPassRouteProtect />}>
+          <Route path="/:id/:token" element={<SetNewPass />} />
+        </Route>
+
     </Routes>
   )
 }

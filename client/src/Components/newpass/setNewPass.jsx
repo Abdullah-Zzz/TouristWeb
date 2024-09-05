@@ -14,27 +14,6 @@ export default function SetNewPass() {
     const {id, token} = useParams()
     const navigate = useNavigate()
     
-    React.useEffect(() =>{
-        const routeProtect = async () =>{
-            try{
-
-                const res = await axios.get(`${Backend_URL}/users/${id}/${token}`,{
-                    validateStatus : (status) =>{
-                        return status < 500
-                    }
-                })
-                if(res.status != 200){
-                    window.location.reload()
-                    navigate('/')
-                }
-            }
-            catch(err){
-                console.log(err)
-            }
-        }
-        routeProtect();
-    },[])
-
     const changingPass =async (e) => {
         e.preventDefault()
         const req = await axios.post(`${Backend_URL}/users/${id}/${token}`, {password:pass,confirmPass:confirmPass}, {

@@ -231,15 +231,18 @@ export default function Booking() {
                                       <p className="booking-commentRatingHead">
                                         please Rate our package:
                                        </p>
+                                       <div className="booking-commentRatingAllStarsDiv">
+
                                         {
                                             new Array(5).fill(null).map((_, index) => {
-                                               return(
-                                                 <div className="booking-commentRatingStarsDiv" key={index+1} onClick={(e) => setRating(index+1)} >
+                                                return(
+                                                    <div className="booking-commentRatingStarsDiv" key={index+1} onClick={(e) => setRating(index+1)} >
                                                     {rating >= index+1 ? <img src="/Images/star.png" /> : <img src="/Images/starEmpty.png" />}
                                                 </div>
                                                 )
                                             })
                                         }
+                                        </div>
                                     </div>
                                 <form method="POST" className="booking-commentForm" onSubmit={(e) => POSTCOMMENT(e)}>
                                 <textarea className="booking-commentInput" placeholder="Your Comment" onChange={(e) =>setAddComment(e.target.value)} required></textarea>
