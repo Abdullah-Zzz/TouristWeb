@@ -24,6 +24,10 @@ const reservationSchema = mongoose.Schema({
     transportation : {
         type:String,
         required : true
+    },
+    date:{
+        type:String,
+        required:true
     }
 })
 

@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ImageSlider from "../Slider/ImageSlider";
 import Table from "../inclusionTable/table";
+import DatePicker from "../customize/datePicker";
 
 export default function Booking() {
     const navigate = useNavigate()
@@ -19,7 +20,8 @@ export default function Booking() {
         number: Number,
         people: 0,
         packageName: '',
-        transportation: "air"
+        transportation: "air",
+        date:String
     })
     const [bookedInfo, setbookedInfo] = React.useState("")
     const [comments, setComments] = React.useState()
@@ -97,7 +99,8 @@ export default function Booking() {
                 number: reservationInfo.number,
                 people: reservationInfo.people,
                 packageName: pageInfo && pageInfo.package_name,
-                transportation: reservationInfo.transportation
+                transportation: reservationInfo.transportation,
+                date: reservationInfo.date
             }, {
                 validateStatus: (status) => {
                     return status < 500;
@@ -147,7 +150,12 @@ export default function Booking() {
             console.log(err)
         }
     }
-    console.log(rating)
+    const handleDateChange = (date) =>{
+        setreservationInfo(oldInfo => ({
+            ...oldInfo,
+            date:date
+        }))
+    }
     return (
         <section className="booking-mainContainer">
             <Nav />
@@ -237,7 +245,7 @@ export default function Booking() {
                                             new Array(5).fill(null).map((_, index) => {
                                                 return(
                                                     <div className="booking-commentRatingStarsDiv" key={index+1} onClick={(e) => setRating(index+1)} >
-                                                    {rating >= index+1 ? <img src="/Images/star.png" /> : <img src="/Images/starEmpty.png" />}
+                                                    {rating >= index+1 ? <img src="/Images/star.png" key={index}/> : <img src="/Images/starEmpty.png" key={index}/>}
                                                 </div>
                                                 )
                                             })
@@ -290,6 +298,7 @@ export default function Booking() {
                                     <option value="air">By Air</option>
                                     <option value="road">By Road</option>
                                 </select>
+                                <DatePicker onChangeFunc={handleDateChange} />
                                 <div className="booking-calculations">
                                     <div className="booking-calc1">
                                         <p>{pageInfo && pageInfo.price} PKR * 1 person</p>

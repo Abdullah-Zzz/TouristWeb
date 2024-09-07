@@ -7,7 +7,7 @@ export default function DatePicker ({onChangeFunc}) {
 
   useEffect(() => {
     flatpickr(datePickerRef.current, {
-      enable: ['2024-07-05', '2024-07-10', '2024-07-15','2024-07-8', '2024-07-12', '2024-07-18', '2024-07-22', '2024-07-25', '2024-07-28'].map(date => new Date(date)),
+      enable: ['2024-09-05', '2024-09-10', '2024-09-15','2024-09-8', '2024-09-12', '2024-09-18', '2024-09-22', '2024-09-25', '2024-09-28'].map(date => new Date(date)),
       onChange: (selectedDates, dateStr, instance) => {
         if (onChangeFunc) {
           onChangeFunc(dateStr);

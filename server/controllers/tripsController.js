@@ -32,7 +32,7 @@ const tripInfo = async (req, res)=>{
 }
 const booked = async (req,res) =>{
     try{
-    const {name, number, people, packageName,transportation} = req.body;
+    const {name, number, people, packageName,transportation,date} = req.body;
     const userInfo = await registModel.findById(req.id)
     const data = new reservationModel({
         email:userInfo.email,
@@ -40,14 +40,15 @@ const booked = async (req,res) =>{
         number:number,
         people: people,
         packageName :packageName,
-        transportation :transportation
+        transportation :transportation,
+        date:date
     });
         if(!name || !number || !people || !packageName || !transportation){
             res.status(404).json("Invalid Input")
         }
         else{
             const isReserved = await reservationModel.findOne({number : number})
-            if(isReserved){
+            if(isReserved && isReserved.packageName == packageName){
                 res.status(409).json("already reserved using this number")
             }
             else{

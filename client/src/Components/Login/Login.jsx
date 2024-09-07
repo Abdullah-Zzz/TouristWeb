@@ -29,7 +29,7 @@ export default function Login() {
         axios.post(`${Backend_URL}/users/login` , {email:PostData.email, password:PostData.password},{
             validateStatus: function (status) {
                 return status < 500; 
-            }
+            },
         })
         .then(res => {
             if(res.status === 200 ){
@@ -42,7 +42,7 @@ export default function Login() {
                 seterrorStyles({...errorStyles, visibility:'visible'})
             }   
         })
-        .catch(err => {seterrorMessage('An error has occurred, please refresh the page') 
+        .catch(err => {seterrorMessage('An error has occurred, please refresh the page')
         })
     }
     return (
