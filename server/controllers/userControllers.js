@@ -4,6 +4,7 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
 const PASS = process.env.PASS
 const EMAIL = process.env.EMAIL
 const nodeMailer = require('nodemailer')
+const CLIENT_URL = "https://touristweb-client.vercel.app"
 
 const getUser = async (req, res, next) => {
     try {
@@ -46,10 +47,7 @@ const loginUser = async (req, res) => {
             }
 
             if (password === chkExists.password) {
-                res.cookie('myCookie', JWT_TOKEN, {
-                    maxaAge: 600,
-                    path: '/'
-                })
+                res.setHeader('Set-Cookie', `myCookie=${JWT_TOKEN}; Max-Age=600; Path=/; SameSite=None; Secure`);
                 res.status(200).json({
                     message: "Logged In",
                     token:JWT_TOKEN
@@ -142,7 +140,7 @@ const sendEmail = async (req, res) => {
                 from: EMAIL,
                 to: email,
                 subject: 'Reset Pass',
-                text: `http://localhost:5173/${userExists._id}/${token}`
+                text: `${CLIENT_URL}/${userExists._id}/${token}`
             }
             transporter.sendMail(mailOptions, (err, info) => {
                 if (err) {

@@ -110,6 +110,7 @@ export default function Booking() {
                 const data = res.data
                 setError("")
                 setbookedInfo(data)
+                window.location.reload()
             }
             else {
                 const data = res.data
@@ -139,7 +140,8 @@ export default function Booking() {
             },{
                 validateStatus:(status) =>{
                     return status < 500;
-                }
+                },
+                withCredentials:true,
             })
             setCommentError(res.data)
             if(res.status == 200){

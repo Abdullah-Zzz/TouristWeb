@@ -30,10 +30,10 @@ export default function Login() {
             validateStatus: function (status) {
                 return status < 500; 
             },
+            withCredentials:true
         })
         .then(res => {
             if(res.status === 200 ){
-                document.cookie = `myCookie=${res.data.token}; max-age=600; path=/`;
                 navigate('/')
                 window.location.reload()
             }

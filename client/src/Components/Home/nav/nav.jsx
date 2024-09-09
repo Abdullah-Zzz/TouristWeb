@@ -13,7 +13,6 @@ export default function Nav() {
   const userInfo = async () => {
     const req = await axios.get(`${Backend_URL}/users/api/user`, {
       validateStatus: (status) => {
-
         return status < 500;
       },
       withCredentials: true
@@ -33,10 +32,7 @@ export default function Nav() {
 
   }
   React.useEffect(() => {
-    const cookie = document.cookie
-    if(cookie){
       userInfo().then(data => setUser(data))
-    }
   }, [])
 
   async function loggingOut() {
