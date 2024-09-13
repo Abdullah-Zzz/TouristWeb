@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ImageSlider from "../Slider/ImageSlider";
 import Table from "../inclusionTable/table";
 import DatePicker from "../customize/datePicker";
+import FullScreenLoading from "../loadingComp/fullScreenloader"
 
 export default function Booking() {
     const navigate = useNavigate()
@@ -28,6 +29,7 @@ export default function Booking() {
     const [addComment, setAddComment] = React.useState("")
     const [commentError,setCommentError] = React.useState("")
     const [rating, setRating] = React.useState(3)
+    const [loadingScreen, setLoadingScreen] = React.useState(false)
     useEffect(() => {
         const fetchInformation = async () => {
             try {
@@ -92,6 +94,7 @@ export default function Booking() {
     }
 
     const handleSubmit = async () => {
+        setLoadingScreen(true)
         const popUp = document.getElementById("booking-popUp");
         try {
             const res = await axios.post(`${Backend_URL}/api/booked`, {
@@ -121,6 +124,9 @@ export default function Booking() {
         catch (err) {
             setbookedInfo(err)
         }
+        finally{
+            setLoadingScreen(false)
+        }
     }
     const popupCancel = () => {
         const popUp = document.getElementById("booking-popUp");
@@ -132,6 +138,7 @@ export default function Booking() {
         popUp.style.display = "flex";
     }
     const POSTCOMMENT =async (e) =>{
+        setLoadingScreen(true)
         e.preventDefault()
         try{
             const res = await axios.post(`${Backend_URL}/comments/${packageId}`,{
@@ -151,6 +158,9 @@ export default function Booking() {
         catch(err){
             console.log(err)
         }
+        finally{
+            setLoadingScreen(false)
+        }
     }
     const handleDateChange = (date) =>{
         setreservationInfo(oldInfo => ({
@@ -160,6 +170,8 @@ export default function Booking() {
     }
     return (
         <section className="booking-mainContainer">
+            {pageInfo ? null :  <FullScreenLoading />}
+            {loadingScreen ? <FullScreenLoading /> : null}
             <Nav />
             < div className="booking-popUp" id="booking-popUp">
                 <div className="booking-confirmation">
